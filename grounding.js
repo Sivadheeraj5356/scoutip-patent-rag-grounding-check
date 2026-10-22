@@ -37,7 +37,7 @@
         } else if (tenant && chunk.tenant !== tenant) {
           findings.push({ level: 'error', code: 'CROSS_TENANT_CITATION', text: `Claim ${i + 1} cites "${citeId}" from tenant "${chunk.tenant}" while answering for tenant "${tenant}" - isolation breach.` });
         } else if (overlap(claim, chunk.text) < 0.6) {
-          findings.push({ level: 'error', code: 'UNSUPPORTED_CLAIM', text: `Claim ${i + 1} is not grounded in cited chunk "${citeId}" (coverage ${(overlap(claim, chunk.text) * 100).toFixed(0)}%): "${claim.slice(0, 80)}..."` });
+          findings.push({ level: 'error', code: 'UNSUPPORTED_CLAIM', text: `Claim ${i + 1} may not be grounded in cited chunk "${citeId}" - keyword overlap ${(overlap(claim, chunk.text) * 100).toFixed(0)}%, below the 60% heuristic threshold: "${claim.slice(0, 80)}...". A true paraphrase can score low; review manually.` });
         }
       }
     });
