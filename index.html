@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Patent RAG Grounding Check</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>Patent RAG Grounding Check</h1>
+    <p class="sub">QA for patent-search answers before a non-expert trusts them. Every claim in the answer must carry a citation, every citation must point at a real retrieved chunk, the chunk must actually support the claim, and nothing may leak across tenant boundaries.</p>
+  </header>
+
+  <section class="card">
+    <label class="lbl" for="chunks">Retrieved chunks, one per line: <code>id | tenant | text</code></label>
+    <textarea id="chunks" rows="6" spellcheck="false">US10123456 | acme | A lithium battery electrode with silicon nanowire anode for improved cycle life and capacity retention.
+US10789123 | acme | Method for queue-based print scheduling across networked office printers.
+EP3000111 | rival-org | Solvent-free coating process for battery cathodes.</textarea>
+
+    <label class="lbl" for="answer">Generated answer, one claim per line with its citation: <code>claim text [chunk-id]</code></label>
+    <textarea id="answer" rows="4" spellcheck="false">The patent describes a lithium battery electrode using a silicon nanowire anode. [US10123456]
+It targets improved cycle life and capacity retention. [US10123456]</textarea>
+
+    <label class="lbl" for="tenant">Answering for tenant</label>
+    <input id="tenant" type="text" value="acme" />
+
+    <button id="run" type="button">Run grounding check</button>
+  </section>
+
+  <section id="results" class="hidden">
+    <div class="grid">
+      <div class="card">
+        <h2>Findings</h2>
+        <ul id="findings" class="findings"></ul>
+      </div>
+      <div class="card">
+        <h2>Claims</h2>
+        <ol id="claims" class="log"></ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>Plain HTML, CSS and JavaScript. No external services, build step or secrets. Tests: <code>npm test</code>.</footer>
+</main>
+<script src="grounding.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
