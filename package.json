@@ -1,0 +1,8 @@
+{
+  "name": "scoutip-patent-rag-grounding-check",
+  "version": "1.0.0",
+  "description": "QA check for patent RAG answers: citation coverage, claim grounding, cross-tenant isolation and empty-retrieval hallucination risk.",
+  "main": "grounding.js",
+  "scripts": { "test": "node --test" },
+  "license": "MIT"
+}
