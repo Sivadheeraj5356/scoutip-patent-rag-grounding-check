@@ -23,7 +23,7 @@
       answer: answerLines.join(' '), citations,
     });
     if (skipped.length) findings.unshift({ level: 'warn', code: 'UNPARSED', text: `Chunk line(s) ${skipped.join(', ')} skipped - expected id | tenant | text.` });
-    if (!findings.length) findings.push({ level: 'ok', code: 'GROUNDED', text: 'Every claim is cited, grounded and tenant-clean.' });
+    if (!findings.length) findings.push({ level: 'ok', code: 'GROUNDED', text: 'Every claim is cited and passes the keyword-overlap heuristic - not a guarantee of semantic grounding; see Limitations in the README.' });
     $('findings').innerHTML = findings.map((f) =>
       `<li class="${f.level}"><span class="code">${esc(f.code)}</span><br>${esc(f.text)}</li>`).join('');
     $('claims').innerHTML = claims.map((c, i) =>
