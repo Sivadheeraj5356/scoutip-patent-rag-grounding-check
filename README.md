@@ -32,3 +32,11 @@ npm test
 ```
 
 The project uses plain HTML, CSS and JavaScript with the Node.js built-in test runner. It has no external services, build step or secrets.
+
+## Limitations
+
+This tool uses keyword-overlap heuristics, not semantic verification:
+
+- The 60% coverage threshold is a tunable heuristic, not a measure of entailment. Correctly grounded paraphrases can fail it; textually similar but wrong claims can pass it.
+- Tenant scoping uses the tenant labels you paste; it cannot verify how the real retrieval pipeline scoped the corpus.
+- Tests verify the heuristics match their intended sample patterns; they do not prove answers are truly grounded.
